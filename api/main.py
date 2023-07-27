@@ -1,7 +1,7 @@
 """Centralized location for prefix declaration for each route."""
 
 from fastapi import FastAPI
-from api.router import (
+from .router import (
     user
 )
 
