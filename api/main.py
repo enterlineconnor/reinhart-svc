@@ -1,7 +1,7 @@
 """Centralized location for prefix declaration for each route."""
 
 from fastapi import FastAPI
-from .router import user, gym
+from .router import client, gym
 
 
 app = FastAPI(
@@ -16,6 +16,6 @@ app.include_router(
 )
 
 app.include_router(
-    user.router,
-    prefix="/user",
+    client.router,
+    prefix="/client",
 )

@@ -1,39 +1,39 @@
-"""Models regarding user data."""
+"""Models regarding client data."""
 
 from uuid import UUID
 from pydantic import BaseModel
 
 
+class ClientResponse(BaseModel):
+    """Client data for response operations"""
 
-class UserResponse(BaseModel):
-    """User data for response operations"""
-    user_id: UUID
+    client_id: UUID
     first_name: str
     last_name: str
     phone: str
     email: str
 
 
-def get_all_users(conn) -> UserResponse | None:
-    """Get all user data"""
+def get_all_clients(conn) -> ClientResponse | None:
+    """Get all client data."""
 
     sql = """
         SELECT
-            user_id,
+            client_id,
             first_name,
             last_name,
             phone,
             email
-        FROM dbo.user_info  
+        FROM dbo.client  
     """
     cursor = conn.cursor()
     row = cursor.execute(sql).fetchone()
     if row:
-        return UserResponse(
-            user_id=row.user_id,
+        return ClientResponse(
+            client_id=row.client_id,
             first_name=row.first_name,
             last_name=row.last_name,
             phone=row.phone,
-            email=row.email
+            email=row.email,
         )
     return None
