@@ -7,7 +7,7 @@ for gym owners.
 This repository is a piece of a collective project, and represents the backend service of the
 web based analytics tool. It is in charge of most CRUD operations that support the frontend app.
 
-![FastAPI image](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png)
+![Body Builder](reinhart_logo.png)
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/connor-enterline-7a493215a/)
 
