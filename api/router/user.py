@@ -1,7 +1,7 @@
 """Handle generic user CRUD operations server side calls."""
 
 from fastapi import APIRouter, Depends
-from ..model.users import get_all_users, UserResponse
+from ..model.user import get_all_users, UserResponse
 from ..database.utils.uow import get_connection
 router = APIRouter()
 

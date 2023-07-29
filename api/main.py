@@ -1,9 +1,8 @@
 """Centralized location for prefix declaration for each route."""
 
 from fastapi import FastAPI
-from .router import (
-    user
-)
+from .router import user, gym
+
 
 app = FastAPI(
     title="Reinhart API",
@@ -11,6 +10,10 @@ app = FastAPI(
     version=0.1,
 )
 
+app.include_router(
+    gym.router,
+    prefix="/gym",
+)
 
 app.include_router(
     user.router,
