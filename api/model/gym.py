@@ -8,6 +8,7 @@ class GymPayload(BaseModel):
     gym_name: str
     subdomain: str
 
+
 def create_gym(new_gym: GymPayload, conn):
     """Get all user data"""
 
@@ -21,8 +22,5 @@ def create_gym(new_gym: GymPayload, conn):
         ) 
     """
     cursor = conn.cursor()
-    cursor.execute(
-        sql,
-        new_gym.gym_name,
-        new_gym.subdomain
-    )
+    cursor.execute(sql, new_gym.gym_name, new_gym.subdomain)
+    conn.commit()
