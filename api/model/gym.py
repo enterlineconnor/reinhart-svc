@@ -1,8 +1,7 @@
 """Models regarding gym data."""
 
 import qrcode
-import pyqrcode
-from pyqrcode import QRCode
+from io import BytesIO
 from uuid import UUID
 from pydantic import BaseModel
 
@@ -41,4 +40,8 @@ def generate_gym_qr_code(gym_id: UUID, conn):
     ).fetchone()
 
     if row:
-        return pyqrcode.create(row.subdomain)
+        img = qrcode.make(row.domain)
+        buf = BytesIO()
+        img.save(buf)
+        buf.seek(0)
+        return buf
