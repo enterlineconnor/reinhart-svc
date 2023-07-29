@@ -1,5 +1,8 @@
 """Models regarding gym data."""
 
+import qrcode
+import pyqrcode
+from pyqrcode import QRCode
 from uuid import UUID
 from pydantic import BaseModel
 
@@ -15,12 +18,27 @@ def create_gym(new_gym: GymPayload, conn):
     sql = """
         INSERT INTO dbo.gym (
             gym_name,
-            subdomain
+            domain
         ) VALUES (
             ?,
             ?
         ) 
     """
     cursor = conn.cursor()
-    cursor.execute(sql, new_gym.gym_name, new_gym.subdomain)
+    cursor.execute(sql, new_gym.gym_name, new_gym.subdomain + ".reinhart.com")
     conn.commit()
+
+
+def generate_gym_qr_code(gym_id: UUID, conn):
+    sql = """
+    SELECT domain FROM dbo.gym WHERE gym_id = ?
+    """
+
+    cursor = conn.cursor()
+    row = cursor.execute(
+        sql,
+        gym_id,
+    ).fetchone()
+
+    if row:
+        return pyqrcode.create(row.subdomain)
